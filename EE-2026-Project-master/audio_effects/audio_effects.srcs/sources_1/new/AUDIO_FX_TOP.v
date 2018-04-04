@@ -14,6 +14,7 @@
 //                    Extra features
 //                    - Play "Do Re Mi" - The Sound of Music
 //                    - 5-second Audio Recorder
+//                    - 7-segment display timer
 // 
 // Work Distribution: James Arista Yaputra -> Musical Instrument + improvement
 //                    Matthew Alexander    -> Audio Delay + improvement
@@ -66,12 +67,13 @@ module AUDIO_FX_TOP(
     play_song u6(state[4], clk_20k, speaker_out2);              // Play "Do Re Mi" - The Sound of Music (extra feature)
                                                                 // state[4] switch to stop and start song
                                                                 
-    twoD_register u7(clk_20k, clk_10k, MIC_in, speaker_out3);   // Audio delay
-    Seven_segment(CLK, btnU, an, cathode_activate);
+    twoD_register u7(state[4], clk_20k, clk_10k, MIC_in, speaker_out3);   // Audio delay
+   
     
     record u5(clk_20k, state[4], MIC_in, speaker_out4);         // Record audio (delay improvement)
                                                                 // state[4] switch to start and stop recording
     
+    Seven_segment(CLK, btnU, an, cathode_activate);             // 7-segment diplay timer
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Always block for feature selection
