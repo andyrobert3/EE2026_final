@@ -18,24 +18,21 @@ module twoD_register(
     reg [11:0] memory [0:40000];
     
     reg [14:0] i = 0;
-    reg [14:0] j = 20000, k = 1;
-    //reg [1:0] a = 0;
-    
+    reg [14:0] j = 20000;
     
     always @ (posedge clk_write) begin
         memory[i] <= data_in;
         i <= (i == 40000) ? 0: i + 1;
-        memory[i] <= data_in;
+        if (ON)
+            memory[i] <= data_in;
     end
-    
-    /*always @ (posedge clk_write) begin
-        memory[k] <= data_in;
-        k <= (k >= 19999) ? 1: k + 2;
-    end*/
     
     always @ (posedge clk_read) begin
         data_out <= memory[j];
-        j <= (j == 40000) ? 0: j + 2;
+        if (ON)
+            j <= (j == 40000) ? 0: j + 2;
+        else 
+            j <= (j == 40000) ? 0: j + 1;
     end        
 endmodule
 
