@@ -2,7 +2,7 @@
 
 // 1-second delay
 module twoD_register(
-        //input ON,
+        input ON,
         input clk_write,
         input clk_read,
         input [11:0] data_in,
